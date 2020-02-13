@@ -1,1 +1,1 @@
-# NServiceBus.Microsoft.DependencyInjection
+# NServiceBus.Extensions.DependencyInjection
