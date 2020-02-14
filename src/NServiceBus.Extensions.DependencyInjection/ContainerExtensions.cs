@@ -12,7 +12,6 @@
         /// <summary>
         /// Use a custom dependency injection container implementing the Microsoft.Extensions.DependencyInjection model.
         /// The container lifetime will be managed by NServiceBus.
-        /// Use <see cref="EndpointWithExternallyManagedContainer"/> to manage container lifecycle yourself.
         /// </summary>
         /// <param name="configuration">The endpoint configuration.</param>
         /// <param name="serviceProviderFactory">The <see cref="IServiceProviderFactory{TContainerBuilder}"/> of the container to be used.</param>
