@@ -52,7 +52,7 @@
             //no-op
         }
 
-        IServiceProvider serviceProvider;
+        readonly IServiceProvider serviceProvider;
 
         class ChildScopeAdapter : IBuilder
         {
@@ -101,7 +101,7 @@
                 //no-op
             }
 
-            IServiceScope serviceScope;
+            readonly IServiceScope serviceScope;
         }
     }
 }
