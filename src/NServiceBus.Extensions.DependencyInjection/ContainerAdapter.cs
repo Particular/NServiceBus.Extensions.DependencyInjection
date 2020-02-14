@@ -11,7 +11,6 @@
     {
         public ContainerAdapter(IServiceProviderFactory<TContainerBuilder> serviceProviderFactory, ContainerSettings<TContainerBuilder> containerSettings)
         {
-            this.containerSettings = containerSettings;
             serviceCollectionAdapter = new ServiceCollectionAdapter(containerSettings.ServiceCollection);
             serviceProviderAdapter = new Lazy<ServiceProviderAdapter>(() =>
             {
@@ -85,7 +84,6 @@
             }
         }
 
-        readonly ContainerSettings<TContainerBuilder> containerSettings;
         readonly ServiceCollectionAdapter serviceCollectionAdapter;
         readonly Lazy<ServiceProviderAdapter> serviceProviderAdapter;
 
