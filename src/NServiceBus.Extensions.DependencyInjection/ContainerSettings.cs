@@ -9,8 +9,6 @@
     /// </summary>
     public class ContainerSettings<TContainerBuilder>
     {
-        internal List<Action<TContainerBuilder>> ContainerConfigurations { get; } = new List<Action<TContainerBuilder>>(0);
-
         /// <summary>
         /// The <see cref="IServiceCollection"/> used to be used by the <see cref="IServiceProvider"/>.
         /// </summary>
@@ -22,6 +20,12 @@
         public void ConfigureContainer(Action<TContainerBuilder> containerConfiguration)
         {
             ContainerConfigurations.Add(containerConfiguration);
+        }
+
+        internal List<Action<TContainerBuilder>> ContainerConfigurations { get; } = new List<Action<TContainerBuilder>>(0);
+
+        internal ContainerSettings()
+        {
         }
     }
 }
