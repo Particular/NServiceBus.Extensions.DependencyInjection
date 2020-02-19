@@ -10,7 +10,12 @@
         [Test]
         public void Approve_NServiceBusExtensionsDependencyInjection()
         {
-            var publicApi = ApiGenerator.GeneratePublicApi(typeof(ContainerExtensions).Assembly, excludeAttributes: new[] { "System.Runtime.Versioning.TargetFrameworkAttribute" });
+            var options = new ApiGeneratorOptions
+            {
+                ExcludeAttributes = new[] { "System.Runtime.Versioning.TargetFrameworkAttribute" }
+            };
+
+            var publicApi = ApiGenerator.GeneratePublicApi(typeof(ContainerExtensions).Assembly, options);
             Approver.Verify(publicApi);
         }
     }
