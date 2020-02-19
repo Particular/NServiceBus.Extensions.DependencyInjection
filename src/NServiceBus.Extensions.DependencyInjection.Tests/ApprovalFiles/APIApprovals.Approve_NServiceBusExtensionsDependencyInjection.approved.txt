@@ -1,6 +1,6 @@
 namespace NServiceBus
 {
-    public class static ContainerExtensions
+    public static class ContainerExtensions
     {
         public static NServiceBus.ContainerSettings<TContainerBuilder> UseContainer<TContainerBuilder>(this NServiceBus.EndpointConfiguration configuration, Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder> serviceProviderFactory) { }
     }
