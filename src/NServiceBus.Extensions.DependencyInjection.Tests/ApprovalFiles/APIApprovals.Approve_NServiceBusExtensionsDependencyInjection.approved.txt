@@ -9,4 +9,12 @@ namespace NServiceBus
         public Microsoft.Extensions.DependencyInjection.IServiceCollection ServiceCollection { get; }
         public void ConfigureContainer(System.Action<TContainerBuilder> containerConfiguration) { }
     }
+    public static class EndpointWithExternallyManagedServiceProvider
+    {
+        public static NServiceBus.IStartableEndpointWithExternallyManagedContainer Create(NServiceBus.EndpointConfiguration endpointConfiguration, Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection) { }
+    }
+    public static class IStartableEndpointWithExternallyManagedContainerExtensions
+    {
+        public static System.Threading.Tasks.Task<NServiceBus.IEndpointInstance> Start(this NServiceBus.IStartableEndpointWithExternallyManagedContainer startableEndpoint, System.IServiceProvider serviceProvider) { }
+    }
 }
