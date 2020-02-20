@@ -1,5 +1,6 @@
 ﻿namespace NServiceBus.Extensions.DependencyInjection.Autofac.AcceptanceTests
 {
+    using System;
     using System.Threading.Tasks;
     using AcceptanceTesting;
     using global::Autofac;
@@ -15,13 +16,19 @@
         public async Task Should_resolve_dependencies_from_serviceprovider()
         {
             IContainer container = null;
+            IServiceProvider serviceProvider = null;
+
             var context = await Scenario.Define<Context>()
                 .WithEndpoint<EndpointWithExternallyManagedContainer>(endpointBuilder =>
                 {
                     var serviceCollection = new ServiceCollection();
+                    // register service using the IServiceCollection API:
+                    serviceCollection.AddSingleton<ServiceCollectionService>();
+
+                    // register service using the NServiceBus container API:
                     endpointBuilder.CustomConfig(endpointConfiguration => endpointConfiguration
                         .RegisterComponents(c => c
-                            .RegisterSingleton(new InternalService())));
+                            .RegisterSingleton(new InternalApiService())));
 
                     endpointBuilder.ToCreateInstance(
                         configuration => Task.FromResult(EndpointWithExternallyManagedServiceProvider.Create(configuration, serviceCollection)),
@@ -29,25 +36,32 @@
                         {
                             var containerBuilder = new ContainerBuilder();
                             containerBuilder.Populate(serviceCollection);
-                            containerBuilder.RegisterInstance(new ExternalService()).SingleInstance();
+                            // register service using the container native API:
+                            containerBuilder.RegisterInstance(new NativeApiService()).SingleInstance();
                             container = containerBuilder.Build();
 
-                            return startableEndpoint.Start(new AutofacServiceProvider(container));
+                            serviceProvider = new AutofacServiceProvider(container);
+                            return startableEndpoint.Start(serviceProvider);
                         });
 
                     endpointBuilder.When(session => session.SendLocal(new TestMessage()));
                 })
-                .Done(c => c.InjectedInternalService != null)
+                .Done(c => c.InjectedInternalApiService != null)
                 .Run();
 
-            Assert.AreSame(context.InjectedExternalService, container.Resolve<ExternalService>());
-            Assert.AreSame(context.InjectedInternalService, container.Resolve<InternalService>());
+            Assert.AreSame(context.InjectedNativeApiService, container.Resolve<NativeApiService>());
+            Assert.AreSame(context.InjectedNativeApiService, serviceProvider.GetService<NativeApiService>());
+            Assert.AreSame(context.InjectedInternalApiService, container.Resolve<InternalApiService>());
+            Assert.AreSame(context.InjectedInternalApiService, serviceProvider.GetService<InternalApiService>());
+            Assert.AreSame(context.InjectedServiceCollectionService, container.Resolve<ServiceCollectionService>());
+            Assert.AreSame(context.InjectedServiceCollectionService, serviceProvider.GetService<ServiceCollectionService>());
         }
 
         class Context : ScenarioContext
         {
-            public InternalService InjectedInternalService { get; set; }
-            public ExternalService InjectedExternalService { get; set; }
+            public InternalApiService InjectedInternalApiService { get; set; }
+            public NativeApiService InjectedNativeApiService { get; set; }
+            public ServiceCollectionService InjectedServiceCollectionService { get; set; }
         }
 
         class EndpointWithExternallyManagedContainer : EndpointConfigurationBuilder
@@ -60,20 +74,23 @@
             public class MessageHandler : IHandleMessages<TestMessage>
             {
                 Context testContext;
-                InternalService internalService;
-                ExternalService externalService;
+                InternalApiService internalApiService;
+                NativeApiService nativeApiService;
+                ServiceCollectionService serviceCollectionService;
 
-                public MessageHandler(Context testContext, InternalService internalService, ExternalService externalService)
+                public MessageHandler(Context testContext, InternalApiService internalApiService, NativeApiService nativeApiService, ServiceCollectionService serviceCollectionService)
                 {
                     this.testContext = testContext;
-                    this.internalService = internalService;
-                    this.externalService = externalService;
+                    this.internalApiService = internalApiService;
+                    this.nativeApiService = nativeApiService;
+                    this.serviceCollectionService = serviceCollectionService;
                 }
 
                 public Task Handle(TestMessage message, IMessageHandlerContext context)
                 {
-                    testContext.InjectedInternalService = internalService;
-                    testContext.InjectedExternalService = externalService;
+                    testContext.InjectedInternalApiService = internalApiService;
+                    testContext.InjectedNativeApiService = nativeApiService;
+                    testContext.InjectedServiceCollectionService = serviceCollectionService;
                     return Task.CompletedTask;
                 }
             }
@@ -83,13 +100,16 @@
         {
         }
 
-        class InternalService
+        class InternalApiService
         {
         }
 
-        class ExternalService
+        class NativeApiService
         {
-            
+        }
+
+        class ServiceCollectionService
+        {
         }
     }
 }
