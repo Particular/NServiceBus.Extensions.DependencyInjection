@@ -17,6 +17,9 @@
         /// <returns>A reference to the endpoint.</returns>
         public static Task<IEndpointInstance> Start(this IStartableEndpointWithExternallyManagedContainer startableEndpoint, IServiceProvider serviceProvider)
         {
+            Guard.AgainstNull(nameof(startableEndpoint), startableEndpoint);
+            Guard.AgainstNull(nameof(serviceProvider), serviceProvider);
+
             return startableEndpoint.Start(new ServiceProviderAdapter(serviceProvider));
         }
     }

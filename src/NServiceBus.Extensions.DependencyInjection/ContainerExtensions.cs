@@ -18,6 +18,9 @@
         public static ContainerSettings<TContainerBuilder> UseContainer<TContainerBuilder>(this EndpointConfiguration configuration,
             IServiceProviderFactory<TContainerBuilder> serviceProviderFactory)
         {
+            Guard.AgainstNull(nameof(configuration), configuration);
+            Guard.AgainstNull(nameof(serviceProviderFactory), serviceProviderFactory);
+
             var containerSettings = new ContainerSettings<TContainerBuilder>();
             IContainer containerAdapter = new ContainerAdapter<TContainerBuilder>(serviceProviderFactory, containerSettings);
             configuration.UseContainer(containerAdapter);
