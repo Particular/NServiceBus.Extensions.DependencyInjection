@@ -1,4 +1,4 @@
-﻿namespace NServiceBus.Extensions.DependencyInjection
+﻿namespace NServiceBus
 {
     using System;
 
