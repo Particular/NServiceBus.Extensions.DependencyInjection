@@ -1,4 +1,4 @@
-﻿namespace NServiceBus.Extensions.DependencyInjection.Autofac.AcceptanceTests
+﻿namespace NServiceBus.Extensions.DependencyInjection.AcceptanceTests
 {
     using System;
     using System.Threading.Tasks;
