@@ -16,7 +16,7 @@
         [Test]
         public async Task Should_resolve_dependencies_from_serviceprovider()
         {
-            WindsorContainer container = null;
+            IWindsorContainer container = null;
             IServiceProvider serviceProvider = null;
 
             var context = await Scenario.Define<Context>()
@@ -36,12 +36,12 @@
                             .Create(configuration, serviceCollection)),
                         startableEndpoint =>
                         {
-                            container = new WindsorContainer();
-                            container.AddServices(serviceCollection);
+                            var windsorFactory = new WindsorServiceProviderFactory();
+                            container = windsorFactory.CreateBuilder(serviceCollection);
                             // register service using the container native API:
-                            container.Register(Component.For<NativeApiService>().LifestyleSingleton());
+                            container.Register(Component.For<NativeApiService>().LifeStyle.Singleton);
 
-                            serviceProvider = new WindsorServiceProvider(container);
+                            serviceProvider = windsorFactory.CreateServiceProvider(container);
                             return startableEndpoint.Start(serviceProvider);
                         });
 
