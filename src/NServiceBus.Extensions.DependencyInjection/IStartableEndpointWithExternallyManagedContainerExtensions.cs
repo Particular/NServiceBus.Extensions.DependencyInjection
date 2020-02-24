@@ -5,7 +5,7 @@
     using Extensions.DependencyInjection;
 
     /// <summary>
-    /// An extension point for to create an endpoint in the start-up phase where the container is externally managed using the Microsoft dependency injection abstraction.
+    /// An extension point to create an endpoint in the start-up phase where the container is externally managed using the Microsoft dependency injection abstraction.
     /// </summary>
     public static class IStartableEndpointWithExternallyManagedContainerExtensions
     {
