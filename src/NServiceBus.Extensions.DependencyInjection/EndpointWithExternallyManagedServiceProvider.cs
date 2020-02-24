@@ -9,7 +9,7 @@
     public static class EndpointWithExternallyManagedServiceProvider
     {
         /// <summary>
-        /// Creates a new startable endpoint based on the provided configuration that uses an externally managed container implementing Microsoft dependency injection abstraction.
+        /// Creates a new startable endpoint based on the provided configuration that uses an externally managed container implementing the Microsoft dependency injection abstraction.
         /// </summary>
         /// <param name="endpointConfiguration">The endpoint configuration.</param>
         /// <param name="serviceCollection">Service collection.</param>
