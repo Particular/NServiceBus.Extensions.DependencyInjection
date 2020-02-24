@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using AcceptanceTesting;
-    using global::Autofac;
-    using global::Autofac.Extensions.DependencyInjection;
+    using Autofac;
+    using Autofac.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection;
     using NServiceBus.AcceptanceTests;
     using NServiceBus.AcceptanceTests.EndpointTemplates;
