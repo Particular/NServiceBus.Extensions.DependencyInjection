@@ -1,10 +1,7 @@
 ﻿namespace NServiceBus.AcceptanceTests
 {
-    using System;
     using System.Threading.Tasks;
     using AcceptanceTesting;
-    using AcceptanceTesting.Support;
-    using Microsoft.Extensions.DependencyInjection;
     using NUnit.Framework;
     using Unity;
     using Unity.Microsoft.DependencyInjection;
@@ -31,7 +28,10 @@
         {
             public TestEndpoint()
             {
-                EndpointSetup<EndpointTemplate>();
+                EndpointSetup<EndpointTemplate>(configuration =>
+                {
+                    configuration.UseContainer<IUnityContainer>(new ServiceProviderFactory(null));
+                });
             }
 
             class TestHandler : IHandleMessages<TestMessage>
@@ -49,21 +49,6 @@
 
         class TestMessage : IMessage
         {
-        }
-    }
-
-    class EndpointTemplate : IEndpointSetupTemplate
-    {
-        public Task<EndpointConfiguration> GetConfiguration(RunDescriptor runDescriptor, EndpointCustomizationConfiguration endpointConfiguration, Action<EndpointConfiguration> configurationBuilderCustomization)
-        {
-            var configuration = new EndpointConfiguration(runDescriptor.ScenarioContext.TestRunId.ToString("D"));
-            configuration.UseTransport<LearningTransport>();
-
-            var containerSettings = configuration.UseContainer<IUnityContainer>(new ServiceProviderFactory(null));
-            containerSettings.ServiceCollection.AddSingleton(runDescriptor.ScenarioContext.GetType(), runDescriptor.ScenarioContext);
-
-            configurationBuilderCustomization(configuration);
-            return Task.FromResult(configuration);
         }
     }
 }

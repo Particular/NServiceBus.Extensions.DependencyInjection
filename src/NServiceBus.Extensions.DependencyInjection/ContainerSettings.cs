@@ -19,6 +19,8 @@
         /// </summary>
         public void ConfigureContainer(Action<TContainerBuilder> containerConfiguration)
         {
+            Guard.AgainstNull(nameof(containerConfiguration), containerConfiguration);
+
             ContainerConfigurations.Add(containerConfiguration);
         }
 
