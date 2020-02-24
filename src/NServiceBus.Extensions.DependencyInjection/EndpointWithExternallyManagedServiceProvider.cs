@@ -4,7 +4,7 @@
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    /// Provides factory methods for creating endpoints instances with an externally managed container implementing the Microsoft dependency injection abstraction.
+    /// Provides factory methods for creating endpoint instances with an externally managed container implementing the Microsoft dependency injection abstraction.
     /// </summary>
     public static class EndpointWithExternallyManagedServiceProvider
     {
