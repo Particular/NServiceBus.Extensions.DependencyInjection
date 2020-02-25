@@ -4,6 +4,4 @@ NServiceBus extension to support Microsoft.Extensions.DependencyInjection
 
 ## How to test locally
 
-## Useful links
-
-TBD
+Nothing specific needed
