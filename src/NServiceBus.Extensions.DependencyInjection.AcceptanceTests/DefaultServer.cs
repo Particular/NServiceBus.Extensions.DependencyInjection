@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using AcceptanceTesting.Support;
+    using Microsoft.Extensions.DependencyInjection;
 
     public class DefaultServer : ExternallyManagedContainerServer
     {
@@ -10,6 +11,7 @@
         {
             return base.GetConfiguration(runDescriptor, endpointCustomizationConfiguration, endpointConfiguration =>
             {
+                endpointConfiguration.UseContainer(new DefaultServiceProviderFactory());
                 configurationBuilderCustomization(endpointConfiguration);
             });
         }
