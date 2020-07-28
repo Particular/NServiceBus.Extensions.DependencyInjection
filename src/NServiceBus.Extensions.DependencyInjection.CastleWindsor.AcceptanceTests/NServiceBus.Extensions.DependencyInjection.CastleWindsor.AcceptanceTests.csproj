@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
-    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.2.4" />
+    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.3.0" />
   </ItemGroup>
 
   <ItemGroup>
