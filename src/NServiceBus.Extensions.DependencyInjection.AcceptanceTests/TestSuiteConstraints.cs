@@ -21,7 +21,7 @@
 
         public IConfigureEndpointTestExecution CreatePersistenceConfiguration()
         {
-            return new ConfigureEndpointLearningPersistence(true);
+            return new ConfigureEndpointLearningPersistence();
         }
     }
 }
