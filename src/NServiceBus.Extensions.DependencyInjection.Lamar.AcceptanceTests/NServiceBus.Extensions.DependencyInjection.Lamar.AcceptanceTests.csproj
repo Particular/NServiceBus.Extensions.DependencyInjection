@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="4.3.0" />
-    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.4.1" />
+    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.4.2" />
   </ItemGroup>
 
   <ItemGroup>
