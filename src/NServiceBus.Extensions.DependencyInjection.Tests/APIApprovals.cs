@@ -15,7 +15,7 @@
                 ExcludeAttributes = new[] { "System.Runtime.Versioning.TargetFrameworkAttribute" }
             };
 
-            var publicApi = ApiGenerator.GeneratePublicApi(typeof(ContainerExtensions).Assembly, options);
+            var publicApi = ApiGenerator.GeneratePublicApi(typeof(InternalType).Assembly, options);
             Approver.Verify(publicApi);
         }
     }
