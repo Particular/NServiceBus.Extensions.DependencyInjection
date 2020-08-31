@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Extensions.DependencyInjection;
 
     /// <summary>
     /// An extension point to create an endpoint in the start-up phase where the container is externally managed using the Microsoft dependency injection abstraction.
@@ -20,7 +19,7 @@
             Guard.AgainstNull(nameof(startableEndpoint), startableEndpoint);
             Guard.AgainstNull(nameof(serviceProvider), serviceProvider);
 
-            return startableEndpoint.Start(new ServiceProviderAdapter(serviceProvider));
+            return startableEndpoint.Start(serviceProvider);
         }
     }
 }

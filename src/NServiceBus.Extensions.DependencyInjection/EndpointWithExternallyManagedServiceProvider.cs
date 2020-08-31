@@ -1,6 +1,5 @@
 ﻿namespace NServiceBus
 {
-    using Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -15,10 +14,7 @@
         /// <param name="serviceCollection">Service collection.</param>
         public static IStartableEndpointWithExternallyManagedContainer Create(EndpointConfiguration endpointConfiguration, IServiceCollection serviceCollection)
         {
-            Guard.AgainstNull(nameof(endpointConfiguration), endpointConfiguration);
-            Guard.AgainstNull(nameof(serviceCollection), serviceCollection);
-
-            return EndpointWithExternallyManagedContainer.Create(endpointConfiguration, new ServiceCollectionAdapter(serviceCollection));
+            return EndpointWithExternallyManagedContainer.Create(endpointConfiguration, serviceCollection);
         }
     }
 }
