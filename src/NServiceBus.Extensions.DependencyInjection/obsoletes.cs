@@ -72,7 +72,9 @@
         ReplacementTypeOrMember = nameof(IStartableEndpointWithExternallyManagedContainer),
         RemoveInVersion = "3",
         TreatAsErrorFromVersion = "2")]
+#pragma warning disable PS0024 // A non-interface type should not be prefixed with I
     public static class IStartableEndpointWithExternallyManagedContainerExtensions
+#pragma warning restore PS0024 // A non-interface type should not be prefixed with I
     {
     }
 
