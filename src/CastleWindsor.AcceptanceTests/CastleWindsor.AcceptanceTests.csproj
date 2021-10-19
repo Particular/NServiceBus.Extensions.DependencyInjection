@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
-    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.2.3" />
+    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.2.3" GeneratePathProperty="True" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="\**\EndpointTemplates\**\DefaultServer.cs" />
+    <Compile Remove="$(PkgNServiceBus_AcceptanceTests_Sources)\**\EndpointTemplates\DefaultServer.cs" />
   </ItemGroup>
 
 </Project>
