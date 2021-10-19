@@ -9,24 +9,27 @@
     <ProjectReference Include="..\NServiceBus.Extensions.DependencyInjection\NServiceBus.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
-    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.2.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="4.1.0" />
+    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.2.3" GeneratePathProperty="True" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GitHubActionsTestLogger" Version="1.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="\**\EndpointTemplates\**\DefaultServer.cs" />
-  </ItemGroup>
-
-  <ItemGroup Label="Ignore the tests with property injection until core is updated with PR https://github.com/Particular/NServiceBus/pull/5578">
-    <Compile Remove="\**\DataBus\**\When_using_custom_IDataBus.cs" />
-    <Compile Remove="\**\Sagas\**\When_sagas_cant_be_found.cs" />
+    <Compile Remove="$(PkgNServiceBus_AcceptanceTests_Sources)\**\EndpointTemplates\DefaultServer.cs" />
   </ItemGroup>
 
 </Project>
