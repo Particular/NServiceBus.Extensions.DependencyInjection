@@ -36,7 +36,7 @@
                         {
                             IServiceProviderFactory<IUnityContainer> factory = new ServiceProviderFactory(container);
                             container = factory.CreateBuilder(serviceCollection);
-                            
+
 
                             // register service using the container native API:
                             container.RegisterSingleton<NativeApiService>();
