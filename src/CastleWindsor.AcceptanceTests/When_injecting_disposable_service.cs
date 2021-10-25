@@ -40,10 +40,10 @@
             public class DemoMessageHandler : IHandleMessages<DemoMessage>
             {
                 Context testContext;
-                // ReSharper disable once NotAccessedField.Local
+#pragma warning disable IDE0052 // Remove unread private members
                 IMyService dependency;
-                // ReSharper disable once NotAccessedField.Local
                 IMyOtherService anotherDependency;
+#pragma warning restore IDE0052 // Remove unread private members
 
                 public DemoMessageHandler(Context testContext, IMyService dependency, IMyOtherService anotherDependency)
                 {

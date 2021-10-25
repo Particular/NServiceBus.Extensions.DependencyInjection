@@ -1,10 +1,10 @@
 ﻿namespace NServiceBus.Extensions.DependencyInjection
 {
+    using System;
+    using System.Linq;
     using Microsoft.Extensions.DependencyInjection;
     using NServiceBus;
     using ObjectBuilder;
-    using System;
-    using System.Linq;
 
     class ServiceCollectionAdapter : IConfigureComponents
     {
@@ -92,10 +92,14 @@
         {
             switch (lifetime)
             {
-                case DependencyLifecycle.SingleInstance: return ServiceLifetime.Singleton;
-                case DependencyLifecycle.InstancePerCall: return ServiceLifetime.Transient;
-                case DependencyLifecycle.InstancePerUnitOfWork: return ServiceLifetime.Scoped;
-                default: throw new NotSupportedException();
+                case DependencyLifecycle.SingleInstance:
+                    return ServiceLifetime.Singleton;
+                case DependencyLifecycle.InstancePerCall:
+                    return ServiceLifetime.Transient;
+                case DependencyLifecycle.InstancePerUnitOfWork:
+                    return ServiceLifetime.Scoped;
+                default:
+                    throw new NotSupportedException();
             }
         }
     }
