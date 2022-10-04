@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using AcceptanceTesting.Support;
     using Lamar;
+    using Lamar.Microsoft.DependencyInjection;
 
     public class DefaultServer : ExternallyManagedContainerServer
     {

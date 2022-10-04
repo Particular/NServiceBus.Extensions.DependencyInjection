@@ -10,16 +10,10 @@
     <ProjectReference Include="..\NServiceBus.Extensions.DependencyInjection\NServiceBus.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
-  </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="4.1.0" />
     <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.5.0" GeneratePathProperty="True" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
