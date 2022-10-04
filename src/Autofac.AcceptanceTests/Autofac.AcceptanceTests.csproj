@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.5.0" GeneratePathProperty="True" />
+    <PackageReference Include="NServiceBus.AcceptanceTests.Sources" Version="7.8.0" GeneratePathProperty="True" />
   </ItemGroup>
 
   <ItemGroup>
